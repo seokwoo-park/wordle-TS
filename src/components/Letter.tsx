@@ -1,6 +1,5 @@
 import React from "react";
-import { BoardType } from "../constants/types/types";
-import useStore from "../store";
+import { boardStore } from "../store";
 
 type PropType = {
   letterPos: number;
@@ -8,7 +7,7 @@ type PropType = {
 };
 
 const Letter = ({ letterPos, attemptVal }: PropType) => {
-  const board = useStore((state) => state.board);
+  const { board } = boardStore();
 
   const letter: string = board[attemptVal][letterPos];
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchWords } from "./api/wordsApi";
 import Board from "./components/Board";
-import Keyboard from "./components/Keyboard";
+import Keyboard from "./components/Keyboard/Keyboard";
 import "./App.css";
 
 function App() {
@@ -21,8 +21,10 @@ function App() {
         <h1>Wordle</h1>
       </nav>
       {solution && <h1>{solution}</h1>}
-      <Board />
-      <Keyboard />
+      <div className="game">
+        <Board />
+        <Keyboard />
+      </div>
     </div>
   );
 }

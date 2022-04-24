@@ -1,10 +1,53 @@
 import create from "zustand";
-import { defaultBoard } from "./constants/Board/defaultBoard";
-import { BoardState } from "./constants/types/types";
+import { defaultAttempt } from "./constants/initialValues/defaultAttempt";
+import { defaultBoard } from "./constants/initialValues/defaultBoard";
+import { AttemptState, BoardState, BoardType } from "./constants/types/types";
 
-const useStore = create<BoardState>((set) => ({
+export const boardStore = create<BoardState>((set) => ({
   board: defaultBoard,
-  updateBoard: (test: unknown) => set((state) => ({ board: state.board })),
+  setBoard: (newBoard: BoardType) => set((state) => ({ board: newBoard })),
 }));
 
-export default useStore;
+export const attemptStore = create<AttemptState>((set) => ({
+  currAttempt: defaultAttempt,
+  increaseLetterPos: () =>
+    set((state) => ({
+      ...state,
+      currAttempt: {
+        ...state.currAttempt,
+        letterPos: state.currAttempt.letterPos + 1,
+      },
+    })),
+  decreaseLetterPos: () =>
+    set((state) => ({
+      ...state,
+      currAttempt: {
+        ...state.currAttempt,
+        letterPos: state.currAttempt.letterPos - 1,
+      },
+    })),
+  resetLetterPos: () =>
+    set((state) => ({
+      ...state,
+      currAttempt: {
+        ...state.currAttempt,
+        letterPos: 0,
+      },
+    })),
+  increaseAttempt: () =>
+    set((state) => ({
+      ...state,
+      currAttempt: {
+        ...state.currAttempt,
+        attempt: state.currAttempt.attempt + 1,
+      },
+    })),
+  resetAttempt: () =>
+    set((state) => ({
+      ...state,
+      currAttempt: {
+        ...state.currAttempt,
+        attempt: 0,
+      },
+    })),
+}));
